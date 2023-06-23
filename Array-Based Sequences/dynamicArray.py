@@ -178,7 +178,51 @@ class DynamicArray:
             self._A[i] = self._A[i - 1]
 
         self._A[index] = element  # insert newest element in desired position
-        self._n += 1   # update the size of array
+        self._n += 1  # update the size of array
+
+    def clear(self):
+        """
+        Removes all elements from the array
+        \n Runs in constant, O(1) time
+        """
+        self._n = 0
+        self._capacity = 1
+        self._A = self._make_array(self._capacity)
+
+    def index(self, element):
+        """
+        Returns the index of the first occurrence of the specified element
+        \n Runs in linear, O(n) time
+        :param element: Element to search for
+        :return: Index of the first occurrence of the specified element, -1 if not found
+        """
+
+        if self.is_empty():  # check if array is empty
+            return -1
+
+        for i in range(self._n):  # iterate through array, searching for first occurrence of element
+            if self._A[i] == element:
+                return i
+
+        return -1
+
+    def count(self, element):
+        """
+        Counts the number of occurrences of a specified element in the array
+        \n Runs in linear, O(n)  time
+        :param element: Element to be searched for
+        :return: Number of elements with the specified value
+        """
+        if self.is_empty():  # check if array is empty
+            return 0
+
+        count = 0
+
+        for i in range(self._n):  # iterate through array, counting occurrences of specified element
+            if self._A[i] == element:
+                count += 1
+
+        return count
 
     def _check_Resize(self):
         """
