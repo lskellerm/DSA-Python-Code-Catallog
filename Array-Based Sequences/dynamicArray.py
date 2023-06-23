@@ -121,6 +121,7 @@ class DynamicArray:
         :param element: Element to be removed
         """
         for i in range(self._n):  # iterate through entire list, searching for first occurrence of element
+
             if self._A[i] == element:
 
                 for j in range(i, self._n - 1):  # Shift elements left to fill "gap" left by removal of element
@@ -138,25 +139,28 @@ class DynamicArray:
     def removeAll(self, element):
         """
         Removes all occurrences of the specified element of the array, if exists
-        Runs in quadratic, O(n^2) time
+        Runs in linear, O(n) time, achieving this using pointers rather than a nested loop
         :param element: Element to be removed
         """
-        count = 0  # counter to keep track of the number of occurrences found
+        count = 0  # counter to keep track of the number of elements needing to be removed
+        non_Matching_index = 0  # pointer to track index of non-matching element
 
-        for i in range(self._n):   # iterate through the entire list, searching for all occurrences of element
-            if self._A[i] == element:
-                count += 1
+        for i in range(self._n):  # iterate through the entire list, searching for all occurrences of element
 
-                for j in range(i, self._n - 1):  # Shift element left to fill "gap" left by removal of elements
-                    self._A[j] = self._A[j + 1]
+            if self._A[i] != element:  # check if current element does not match target element
+                self._A[non_Matching_index] = self._A[i]  # store non-matching element at current
+                non_Matching_index += 1  # increment pointer
 
-                self._A[self._n - 1] = None  # Garbage collect
+        count = self._n - non_Matching_index  # update the number of elements removed
+
+        for i in range(non_Matching_index, self._n - 1):  # iterate through list and garbage collect
+            self._A[i] = None
+
+        self._n -= count  # update size of list to reflect removal of element
+        self._check_Resize()  # perform resizing operation if necessary
 
         if count == 0:
             raise ValueError('Value not found')
-
-        self._n -= count  # update size of list to reflect removal of element
-        self._check_Resize()
 
     def _check_Resize(self):
         """
