@@ -162,6 +162,24 @@ class DynamicArray:
         if count == 0:
             raise ValueError('Value not found')
 
+    def insert(self, index, element):
+        """
+        Inserts specified element at the given index
+        \n Runs in linear, O(n) time
+        :param index: Index where specified element is to be inserted
+        :param element: Element to be inserted
+        """
+        if not 0 < index < self._n:  # Checks whether given index is out of bounds
+            raise IndexError('Invalid index')
+
+        self._check_Resize()  # perform resizing operation if necessary
+
+        for i in range(self._n, index, -1):  # iterate through list and shift elements after index right
+            self._A[i] = self._A[i - 1]
+
+        self._A[index] = element  # insert newest element in desired position
+        self._n += 1   # update the size of array
+
     def _check_Resize(self):
         """
         Private utility method to handle checking whether resize operation is needed, shrinking or expanding if needed
