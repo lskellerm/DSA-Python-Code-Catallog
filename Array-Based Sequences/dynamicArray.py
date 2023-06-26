@@ -230,10 +230,24 @@ class DynamicArray:
         while start < end:  # iterate through array until they meet or cross, meaning start > end
             self._A[start], self._A[end] = self._A[end], self._A[start]  # swap the elements at start & end position
                                                                          # utilizing tuple unpacking
-            
+
             #  increment/decrement both pointers
             start += 1
             end -= 1
+
+    def extend(self, other_array):
+        """
+        Appends the elements from another array to the current array
+        \n Runs in O(m) time, where m is length of the other array
+        :param other_array: Array to be appended to current array
+        """
+        array_Size = len(other_array)
+        if array_Size + self._n > self._capacity:  # check if current capacity is enough for appending other array
+            self._resize(self._n + array_Size)  # resize array to accommodate resulting array size
+
+        for i in range(array_Size):  # iterate through other array and append each element to the current array
+            self._A[self._n] = other_array[i]  # assigning element to the next available position
+            self._n += 1  # update size of array
 
     def _check_Resize(self):
         """
@@ -251,12 +265,12 @@ class DynamicArray:
         :param c: New capacity of the array to be created
         :return: Newly resized array
         """
-        newArray = self._make_array(cap)  # creates a new (bigger) array
+        new_Array = self._make_array(cap)  # creates a new (bigger) array
 
         for i in range(self._n):  # iterate over current array and copy over elements to new array
-            newArray[i] = self._A[i]
+            new_Array[i] = self._A[i]
 
-        self._A = newArray  # updating the underlying array to now reference newly created (larger) array
+        self._A = new_Array  # updating the underlying array to now reference newly created (larger) array
         self._capacity = cap  # update capacity of array
 
     def _make_array(self, cap):
