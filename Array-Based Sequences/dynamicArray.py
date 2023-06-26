@@ -197,9 +197,6 @@ class DynamicArray:
         :return: Index of the first occurrence of the specified element, -1 if not found
         """
 
-        if self.is_empty():  # check if array is empty
-            return -1
-
         for i in range(self._n):  # iterate through array, searching for first occurrence of element
             if self._A[i] == element:
                 return i
@@ -213,9 +210,6 @@ class DynamicArray:
         :param element: Element to be searched for
         :return: Number of elements with the specified value
         """
-        if self.is_empty():  # check if array is empty
-            return 0
-
         count = 0
 
         for i in range(self._n):  # iterate through array, counting occurrences of specified element
@@ -224,12 +218,29 @@ class DynamicArray:
 
         return count
 
+    def reverse(self):
+        """
+        Reverses the order of elements in the array
+        \n Runs in linear, O(n) time.
+        Utilizes in-place reversal, and the two-pointer approach
+        """
+        start = 0  # start pointer, for the first element
+        end = self._n - 1  # end pointer, for the last element
+
+        while start < end:  # iterate through array until they meet or cross, meaning start > end
+            self._A[start], self._A[end] = self._A[end], self._A[start]  # swap the elements at start & end position
+                                                                         # utilizing tuple unpacking
+            
+            #  increment/decrement both pointers
+            start += 1
+            end -= 1
+
     def _check_Resize(self):
         """
         Private utility method to handle checking whether resize operation is needed, shrinking or expanding if needed
         """
         if self._n == self._SHRINK_FACTOR * self._capacity:  # Check whether array is 1/4 of capacity, resize to half
-            self._resize(self._capacity // 2)  # calling resize method to half current capacity of array\
+            self._resize(self._capacity // 2)  # calling resize method to half current capacity of array
 
         if self._n == self._capacity:  # Check whether array capacity has been reached
             self._resize(self._capacity * self._GROWTH_FACTOR)  # calling resize method to double capacity
