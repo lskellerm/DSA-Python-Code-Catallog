@@ -268,7 +268,19 @@ class DynamicArray:
             self._A[self._n] = other_array[i]  # assigning element to the next available position
             self._n += 1  # update size of array
 
+    def copy(self):
+        """
+        Returns a new dynamicArray object that is a copy of the current array
+        \n Runs in O(n), linear time
+        :return: A copy of the specified array
+        """
+        new_Array = DynamicArray(self._capacity)  # New instance of the dynamicArray object
+        new_Array._set_n(self._n)
 
+        for i in range(self._n):  # iterate through current array
+            new_Array[i] = self._A[i]
+
+        return new_Array
 
     def _check_Resize(self):
         """
@@ -296,7 +308,7 @@ class DynamicArray:
 
     def _set_n(self, numOfElements):
         """
-        Private utility method to only be used by the __add__ function to update the number of elements
+        Private utility method to only be used by the __add__ and copy function to update the number of elements
         in the newly created array from concatenation operation purposes
         :param numOfElements: Number of elements
         """
