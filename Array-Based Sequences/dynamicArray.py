@@ -27,14 +27,6 @@ class DynamicArray:
         """
         return self._n
 
-    def is_empty(self):
-        """
-        Checks if the array is empty
-        \n Runs in constant, O(1) time
-        :return: True if the array is empty, False otherwise
-        """
-        return self._n == 0
-
     def __getitem__(self, k):
         """
         Accesses the element at a specific index in the array
@@ -65,6 +57,33 @@ class DynamicArray:
         """
         elements = [str(self._A[i]) for i in range(self._n)]
         return "[" + ", ".join(elements) + "]"
+
+    def __add__(self, other_array):
+        """
+        Concatenates two arrays together, and returns result as new DynamicArray
+        Runs in O(n) time, linear where n is the total number of elements in both arrays
+        :param other_array: Array to be concatenated to current array
+        :return Concatenated DynamicArray
+        """
+        new_Array_Size = len(other_array) + self._n  # obtain the size of the new array
+        newArray = DynamicArray(new_Array_Size)  # create a new dynamic array
+        newArray._set_n(new_Array_Size)  # update the number of elements in new array so indexing is possible
+
+        for i in range(self._n):  # iterate through first array and copy elements to new array
+            newArray[i] = self._A[i]
+
+        for i in range(len(other_array)):  # iterate through second array and copy elements to new array
+            newArray[self._n + i] = other_array[i]
+
+        return newArray
+
+    def is_empty(self):
+        """
+        Checks if the array is empty
+        \n Runs in constant, O(1) time
+        :return: True if the array is empty, False otherwise
+        """
+        return self._n == 0
 
     def append(self, element):
         """
@@ -249,24 +268,7 @@ class DynamicArray:
             self._A[self._n] = other_array[i]  # assigning element to the next available position
             self._n += 1  # update size of array
 
-    def __add__(self, other_array):
-        """
-        Concatenates two arrays together, and returns result as new DynamicArray
-        Runs in O(n) time, linear where n is the total number of elements in both arrays
-        :param other_array: Array to be concatenated to current array
-        :return Concatenated DynamicArray
-        """
-        new_Array_Size = len(other_array) + self._n  # obtain the size of the new array
-        newArray = DynamicArray(new_Array_Size)  # create a new dynamic array
-        newArray._set_n(new_Array_Size)  # update the number of elements in new array so indexing is possible
 
-        for i in range(self._n):  # iterate through first array and copy elements to new array
-            newArray[i] = self._A[i]
-
-        for i in range(len(other_array)):  # iterate through second array and copy elements to new array
-            newArray[self._n + i] = other_array[i]
-
-        return newArray
 
     def _check_Resize(self):
         """
