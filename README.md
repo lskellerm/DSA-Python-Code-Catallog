@@ -1,7 +1,7 @@
 # DSA-Python-Code-Catalog 
 Code Catalog of Data Structures and Algorithms for coding interview prep
 
-This is for my practice with **_Data Structures and Algorithms_** and getting comfortable using _**Git and GitHub**_, and _**creating
+This is for my practice with **_Data Structures and Algorithms_**, getting comfortable using _**Git and GitHub**_, and _**creating
 unit tests**_ to ensure valid behavior of implemented Data Structures
 
 Repository includes implementation of key Data Structure, algorithms, as well as their respective _**unit tests**_, using
