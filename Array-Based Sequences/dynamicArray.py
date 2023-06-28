@@ -29,14 +29,25 @@ class DynamicArray:
 
     def __getitem__(self, k):
         """
-        Accesses the element at a specific index in the array
-        \n Runs in constant time
-        :param k: Index of item which is to be retrieved
-        :return: Element at specified index
+        Accesses the element at a specific index in the array or a range of indices in the array
+        \n Runs in O(1), when single index is given, or O(k) when range is given, where k is length of slice
+        :param k: Index of item which is to be retrieved, or slice object indicating items to be retrieved
+        :return: Element at specified index, or new DynamicArray with the specified slice elements
         """
-        if not 0 <= k < self._n:  # Conditional to check out if index is out of bounds
+        if isinstance(k, slice):  # checks whether value given is a slice object
+            start, stop, step = k.indices(self._n)  # get the start, stop, and step values from the slice
+            sliced_array = DynamicArray(stop - start)  # create new dynamicArray object for sliced elements
+            sliced_array._set_n(stop - start)  # set number of elements to allow indexing in new dynamicArray
+
+            for i in range(start, stop, step):  # iterate through array with specified sliced range
+                sliced_array[i - start] = self._A[i]  # copy sliced elements into the new dynamicArray
+
+            return sliced_array
+
+        elif not 0 <= k < self._n:  # checks if index is out of bounds
             raise IndexError('Invalid index')
-        return self._A[k]
+        else:
+            return self._A[k]
 
     def __setitem__(self, k, element):
         """
@@ -67,7 +78,7 @@ class DynamicArray:
         """
         new_Array_Size = len(other_array) + self._n  # obtain the size of the new array
         newArray = DynamicArray(new_Array_Size)  # create a new dynamic array
-        newArray._set_n(new_Array_Size)  # update the number of elements in new array so indexing is possible
+        newArray._set_n(new_Array_Size)  # set number of elements to allow indexing in new dynamicArray
 
         for i in range(self._n):  # iterate through first array and copy elements to new array
             newArray[i] = self._A[i]
@@ -248,7 +259,7 @@ class DynamicArray:
 
         while start < end:  # iterate through array until they meet or cross, meaning start > end
             self._A[start], self._A[end] = self._A[end], self._A[start]  # swap the elements at start & end position
-                                                                         # utilizing tuple unpacking
+            # utilizing tuple unpacking
 
             #  increment/decrement both pointers
             start += 1
@@ -275,7 +286,7 @@ class DynamicArray:
         :return: A copy of the specified array
         """
         new_Array = DynamicArray(self._capacity)  # New instance of the dynamicArray object
-        new_Array._set_n(self._n)
+        new_Array._set_n(self._n)  # set number of elements to allow indexing in new dynamicArray
 
         for i in range(self._n):  # iterate through current array
             new_Array[i] = self._A[i]
@@ -308,8 +319,8 @@ class DynamicArray:
 
     def _set_n(self, numOfElements):
         """
-        Private utility method to only be used by the __add__ and copy function to update the number of elements
-        in the newly created array from concatenation operation purposes
+        Private utility method to only be used by the __get__, __add__ and copy function to update the number of
+        elements in the newly created array from concatenation operation purposes
         :param numOfElements: Number of elements
         """
         self._n = numOfElements
