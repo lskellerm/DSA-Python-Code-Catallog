@@ -1,4 +1,5 @@
 import ctypes
+from Sorting import InsertionSort
 
 
 class DynamicArray:
@@ -292,6 +293,15 @@ class DynamicArray:
             new_Array[i] = self._A[i]
 
         return new_Array
+
+    def sort(self, order='ascending'):
+        """
+        Sorts the elements in the dynamicArray, ascending order if none is given
+        \n Runs in O(n^2), quadratic time, implemented using InsertionSort algorithm
+        :param order: Order in which array is sorted, default is ascending
+        :return: Sorted dynamic array
+        """
+        return InsertionSort.insertion_Sort(self, order)
 
     def _check_Resize(self):
         """
