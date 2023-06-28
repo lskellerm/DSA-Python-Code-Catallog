@@ -1,6 +1,5 @@
 import ctypes
-from Sorting import InsertionSort
-
+from Sorting.InsertionSort import insertion_Sort
 
 class DynamicArray:
     """A dynamic array class similar to a Python list with automatic resizing capabilities
@@ -301,7 +300,7 @@ class DynamicArray:
         :param order: Order in which array is sorted, default is ascending
         :return: Sorted dynamic array
         """
-        return InsertionSort.insertion_Sort(self, order)
+        return insertion_Sort(self, order)
 
     def _check_Resize(self):
         """
