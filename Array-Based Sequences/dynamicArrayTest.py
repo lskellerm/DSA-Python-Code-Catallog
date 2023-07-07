@@ -224,5 +224,30 @@ class DynamicArrayTest(unittest.TestCase):
         with self.assertRaises(IndexError):
             item = self.dynArr[1]
 
+    def test_pop_empty_array(self):
+        with self.assertRaises(Exception):
+            self.dynArr.pop()
+
+    def test_pop_invalid_index(self):
+        self.dynArr.append(1)
+        with self.assertRaises(IndexError):
+            self.dynArr.pop(2)
+
+    def test_remove_value_not_found(self):
+        with self.assertRaises(ValueError):
+            self.dynArr.remove(15)
+
+        self.dynArr.append(5)
+        self.dynArr.append(5)
+        self.dynArr.append(2)
+
+        with self.assertRaises(ValueError):
+            self.dynArr.removeAll(7)
+
+    def test_insert_invalid_index(self):
+        with self.assertRaises(IndexError):
+            self.dynArr.insert(1, 23)
+
+
 if __name__ == '__main__':
     unittest.main()
