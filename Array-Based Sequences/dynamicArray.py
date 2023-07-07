@@ -1,5 +1,4 @@
 import ctypes
-import random
 
 from Sorting.InsertionSort import insertion_Sort
 
@@ -66,7 +65,7 @@ class DynamicArray:
     def __str__(self):
         """
         Returns a string representation of the dynamic array
-        \n Runs in constant, O(1) time
+        \n Runs in constant, O(n) time
         :return: String representation of the Array
         """
         elements = [str(self._A[i]) for i in range(self._n)]
