@@ -25,7 +25,6 @@ class DynamicArrayTest(unittest.TestCase):
         self.assertEqual(len(self.dynArr), 2)
 
     def test_getitem(self):
-        print(self.dynArr)
         self.dynArr.append(15)
         self.dynArr.append(5)
         self.dynArr.append(2)
@@ -56,9 +55,9 @@ class DynamicArrayTest(unittest.TestCase):
         self.assertEqual((str(self.dynArr)), expected_array)
 
     def test_is_empty(self):
-        self.assertEqual(self.dynArr.is_empty(), True)
+        self.assertTrue(self.dynArr.is_empty())
         self.dynArr.append(5)
-        self.assertEqual(self.dynArr.is_empty(), False)
+        self.assertFalse(self.dynArr.is_empty())
 
     def test_append(self):
         self.assertEqual(len(self.dynArr), 0)
@@ -120,7 +119,110 @@ class DynamicArrayTest(unittest.TestCase):
 
         self.assertEqual(self.dynArr[2], 15)
 
+    def test_clear(self):
+        self.dynArr.append(1)
+        self.dynArr.append(10)
+        self.dynArr.append(8)
 
+        self.dynArr.clear()
+
+        self.assertEqual(len(self.dynArr), 0)
+        self.assertEqual(str(self.dynArr), str([]))
+        self.assertTrue(self.dynArr.is_empty())
+
+    def test_index(self):
+        self.dynArr.append(1)
+        self.dynArr.append(10)
+        self.dynArr.append(8)
+
+        self.assertEqual(self.dynArr.index(8), 2)
+        self.assertEqual(self.dynArr.index(15), -1)
+
+    def test_count(self):
+        self.dynArr.append(1)
+        self.dynArr.append(10)
+        self.dynArr.append(8)
+        self.dynArr.append(10)
+        self.dynArr.append(10)
+        self.dynArr.append(8)
+
+        self.assertEqual(self.dynArr.count(10), 3)
+        self.assertEqual(self.dynArr.count(5), 0)
+
+    def test_reverse(self):
+        self.dynArr.append(1)
+        self.dynArr.append(10)
+        self.dynArr.append(8)
+        self.dynArr.append(5)
+        self.dynArr.append(9)
+
+        reversed_list = [9, 5, 8, 10, 1]
+        self.dynArr.reverse()
+        self.assertEqual(len(self.dynArr), len(reversed_list))
+
+        for i in range(len(reversed_list)):
+            self.assertEqual(self.dynArr[i], reversed_list[i])
+
+    def test_extend(self):
+        self.dynArr.append(1)
+        self.dynArr.append(10)
+        self.dynArr.append(8)
+
+        dynArr2 = DynamicArray()
+        dynArr2.append(2)
+        dynArr2.append(1)
+        dynArr2.append(4)
+
+        extended_Array_Length = len(self.dynArr) + len(dynArr2)
+        self.dynArr.extend(dynArr2)
+
+        self.assertEqual(len(self.dynArr), extended_Array_Length)
+
+        self.assertEqual(self.dynArr[3], dynArr2[0])
+        self.assertEqual(self.dynArr[4], dynArr2[1])
+        self.assertEqual(self.dynArr[5], dynArr2[2])
+
+    def test_copy(self):
+        self.dynArr.append(1)
+        self.dynArr.append(10)
+        self.dynArr.append(8)
+
+        dynArrayCopy = self.dynArr.copy()
+
+        self.assertIsNot(self.dynArr, dynArrayCopy)
+        self.assertEqual(len(dynArrayCopy), len(self.dynArr))
+        self.assertEqual(str(self.dynArr), str(dynArrayCopy))
+
+    def test_sort(self):
+        self.dynArr.append(21)
+        self.dynArr.append(14)
+        self.dynArr.append(1)
+        self.dynArr.append(13)
+        self.dynArr.append(100)
+
+        expected_Sorted_Array_Asc = '[1, 13, 14, 21, 100]'
+
+        self.dynArr.sort('ascending')
+        self.assertEqual(len(self.dynArr), 5)
+        self.assertEqual(str(self.dynArr), expected_Sorted_Array_Asc)
+
+        expected_Sorted_Array_Desc = '[100, 21, 14, 13, 1]'
+
+        self.dynArr.sort('descending')
+        self.assertEqual(len(self.dynArr), 5)
+        self.assertEqual(str(self.dynArr), expected_Sorted_Array_Desc)
+
+    def test_setitem_invalid_index(self):
+        self.dynArr.append(10)
+
+        with self.assertRaises(IndexError):
+            self.dynArr[1] = 20
+
+    def test_getitem_invalid_index(self):
+        self.dynArr.append(10)
+
+        with self.assertRaises(IndexError):
+            item = self.dynArr[1]
 
 if __name__ == '__main__':
     unittest.main()
