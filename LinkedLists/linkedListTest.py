@@ -110,7 +110,6 @@ class LinkedListTest(unittest.TestCase):
 
         self.assertEqual(value, 85)
         self.assertEqual(self.multi_El_LinkedList, old_Count - 1)
-        self.assertEqual(len(self.multi_El_LinkedList), 2)
         self.assertEqual(self.multi_El_LinkedList.head, 65)
         self.assertEqual(self.multi_El_LinkedList.head.get_next(), 45)
 
@@ -153,9 +152,25 @@ class LinkedListTest(unittest.TestCase):
         self.assertEqual(self.single_El_LinkedList.tail, None)
 
     def test_Pop_Back_Multi_El_List(self):
+        old_Count = len(self.multi_El_LinkedList)
         value = self.multi_El_LinkedList.pop_Back()
 
         self.assertEqual(value, 45)
+        self.assertEqual(len(self.multi_El_LinkedList), old_Count - 1)
+        self.assertEqual(self.multi_El_LinkedList.head, 65)
+        self.assertEqual(self.multi_El_LinkedList.head.get_next(), 45)
+        self.assertEqual(self.multi_El_LinkedList.head.get_next().get_next(), None)
+
+    def test_Front_Empty_List(self):
+        with self.assertRaises(Exception):
+            self.empty_LinkedList.front()
+
+    def test_Front_Non_Empty_List(self):
+        value = self.single_El_LinkedList.front()
+        self.assertEqual(value, 25)
+
+        value = self.multi_El_LinkedList.front()
+        self.assertEqual(value, 85)
 
 
 if __name__ == '__main__':
