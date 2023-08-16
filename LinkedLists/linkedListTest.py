@@ -172,6 +172,18 @@ class LinkedListTest(unittest.TestCase):
         value = self.multi_El_LinkedList.front()
         self.assertEqual(value, 85)
 
+    def test_Back_Empty_List(self):
+        with self.assertRaises(Exception):
+            self.empty_LinkedList.back()
+
+    def test_Back_Non_Empty_List(self):
+        value = self.single_El_LinkedList.back()
+        self.assertEqual(value, 25)
+
+        value = self.multi_El_LinkedList.back()
+        self.assertEqual(value, 45)
+
+
 
 if __name__ == '__main__':
         unittest.main()
