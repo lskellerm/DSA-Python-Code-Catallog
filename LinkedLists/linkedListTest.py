@@ -183,7 +183,51 @@ class LinkedListTest(unittest.TestCase):
         value = self.multi_El_LinkedList.back()
         self.assertEqual(value, 45)
 
+    def test_insert_Invalid_Index(self):
+        with self.assertRaises(IndexError):
+            self.empty_LinkedList.insert(1, 100)
 
+        with self.assertRaises(IndexError):
+            self.single_El_LinkedList.insert(2, 25)
+
+        with self.assertRaises(IndexError):
+            self.multi_El_LinkedList.insert(-1, 40)
+
+        with self.assertRaises(IndexError):
+            self.multi_El_LinkedList.insert(5, 75)
+
+    def test_Insert_Empty_List(self):
+        self.empty_LinkedList.insert(0, 50)
+        self.assertEqual(self.empty_LinkedList.value_At(0), 50)
+        self.assertEqual(self.empty_LinkedList.head.get_next().data, None)
+
+    def test_Insert_Non_Empty_List(self):
+        self.single_El_LinkedList.insert(0, 45)
+        self.assertEqual(self.single_El_LinkedList.value_At(0), 45)
+        self.assertEqual(len(self.single_El_LinkedList), 2)
+        self.assertEqual(self.single_El_LinkedList.head.get_next().data, 25)
+
+        old_Count = len(self.multi_El_LinkedList)
+        old_Value = self.multi_El_LinkedList.value_At(1)
+        self.multi_El_LinkedList.insert(1, 75)
+        self.assertEqual(self.multi_El_LinkedList.value_At(1), 75)
+        self.assertEqual(len(self.multi_El_LinkedList), old_Count + 1)
+        self.assertEqual(self.multi_El_LinkedList.head.get_next().get_next().data, old_Value)
+
+    def test_Insert_At_End(self):
+        old_Tail_Value = self.single_El_LinkedList.tail
+        self.single_El_LinkedList.insert(len(self.single_El_LinkedList) - 1, 200)
+        self.assertEqual(self.single_El_LinkedList.tail.data, 100)
+        self.assertEqual(self.single_El_LinkedList.tail.get_next, None)
+        self.assertEqual(len(self.single_El_LinkedList), 2)
+        self.assertEqual(self.single_El_LinkedList.value_At(len(self.single_El_LinkedList) - 2), old_Tail_Value)
+
+        old_Tail_Value = self.multi_El_LinkedList.tail
+        self.multi_El_LinkedList.insert(len(self.multi_El_LinkedList) - 1, 2)
+        self.assertEqual(self.multi_El_LinkedList.tail.data, 2)
+        self.assertEqual(self.multi_El_LinkedList.tail.get_next, None)
+        self.assertEqual(len(self.multi_El_LinkedList), 2)
+        self.assertEqual(self.multi_El_LinkedList.value_At(len(self.multi_El_LinkedList) - 2), old_Tail_Value)
 
 if __name__ == '__main__':
         unittest.main()
