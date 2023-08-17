@@ -229,5 +229,44 @@ class LinkedListTest(unittest.TestCase):
         self.assertEqual(len(self.multi_El_LinkedList), 2)
         self.assertEqual(self.multi_El_LinkedList.value_At(len(self.multi_El_LinkedList) - 2), old_Tail_Value)
 
+    def test_Erase_Invalid_Index(self):
+        with self.assertRaises(IndexError):
+            self.single_El_LinkedList.erase(1)
+
+        with self.assertRaises(IndexError):
+            self.multi_El_LinkedList.erase(-1)
+
+        with self.assertRaises(IndexError):
+            self.multi_El_LinkedList.erase(len(self.multi_El_LinkedList))
+
+    def test_Erase_Empty_List(self):
+        with self.assertRaises(Exception):
+            self.empty_LinkedList.erase(0)
+
+    def test_Erase_Single_El_List(self):
+        self.single_El_LinkedList.erase(0)
+
+        self.assertEqual(self.single_El_LinkedList.is_Empty(), True)
+        self.assertEqual(self.single_El_LinkedList.head, None)
+        self.assertEqual(self.single_El_LinkedList.head, self.single_El_LinkedList.tail)
+        self.assertEqual(len(self.single_El_LinkedList), 0)
+
+    def test_Erase_Multi_El_List(self):
+        old_Count = len(self.multi_El_LinkedList)
+        self.multi_El_LinkedList.erase(1)
+
+        self.assertEqual(len(self.multi_El_LinkedList), old_Count - 1)
+        self.assertNotEqual(self.multi_El_LinkedList.value_At(1), 65)
+        self.assertEqual(self.multi_El_LinkedList.head.get_next().data, 45)
+
+    def test_Erase_At_End(self):
+        old_Count = len(self.multi_El_LinkedList)
+        self.multi_El_LinkedList.erase(old_Count - 1)  # Erases the node at the end of the linked list
+
+        self.assertEqual(len(self.multi_El_LinkedList), old_Count - 1)
+        self.assertNotEqual(self.multi_El_LinkedList.tail.data, 45)
+        self.assertEqual(self.multi_El_LinkedList.tail.data, 65)
+        self.assertEqual(self.multi_El_LinkedList.tail, None
+
 if __name__ == '__main__':
         unittest.main()
