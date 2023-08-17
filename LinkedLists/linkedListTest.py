@@ -16,6 +16,7 @@ class LinkedListTest(unittest.TestCase):
 
     def test_init(self):
         self.assertEqual(len(self.empty_LinkedList), 0)
+        self.assertEqual(self.empty_LinkedList.is_Empty(), True)
         self.assertIsNone(self.empty_LinkedList.head)
         self.assertEqual(self.empty_LinkedList.head, self.empty_LinkedList.tail)
 
@@ -30,10 +31,6 @@ class LinkedListTest(unittest.TestCase):
         self.assertEqual(self.multi_El_LinkedList, False)
 
     def test_Value_At(self):
-        self.assertEqual(self.empty_LinkedList.value_At(0), None)
-        self.assertEqual(self.empty_LinkedList.value_At(0), self.empty_LinkedList.head)
-        self.assertEqual(self.empty_LinkedList.value_At(0), self.empty_LinkedList.tail)
-
         self.assertEqual(self.single_El_LinkedList.value_At(0), 25)
         self.assertEqual(self.single_El_LinkedList.value_At(0), self.single_El_LinkedList.head)
         self.assertEqual(self.single_El_LinkedList.value_At(0), self.single_El_LinkedList.tail)
@@ -44,7 +41,7 @@ class LinkedListTest(unittest.TestCase):
 
     def test_Value_At_Invalid_Index(self):
         with self.assertRaises(IndexError):
-            self.empty_LinkedList.value_At(1)
+            self.empty_LinkedList.value_At(0)
 
         with self.assertRaises(IndexError):
             self.single_El_LinkedList.value_At(1)
@@ -266,7 +263,8 @@ class LinkedListTest(unittest.TestCase):
         self.assertEqual(len(self.multi_El_LinkedList), old_Count - 1)
         self.assertNotEqual(self.multi_El_LinkedList.tail.data, 45)
         self.assertEqual(self.multi_El_LinkedList.tail.data, 65)
-        self.assertEqual(self.multi_El_LinkedList.tail, None
+        self.assertEqual(self.multi_El_LinkedList.tail, None)
+
 
 if __name__ == '__main__':
         unittest.main()
