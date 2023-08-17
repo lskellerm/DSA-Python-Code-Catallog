@@ -291,6 +291,23 @@ class LinkedListTest(unittest.TestCase):
         value = self.multi_El_LinkedList.value_From_End(1)
         self.assertEqual(value, 65)
 
+    def test_Reverse(self):
+        self.empty_LinkedList.reverse()
+        self.assertTrue(self.empty_LinkedList.is_Empty())
+
+        self.single_El_LinkedList.reverse()
+        self.assertEqual(self.single_El_LinkedList.value_At(0), 25)
+        self.assertEqual(self.single_El_LinkedList.head, self.single_El_LinkedList.tail)
+
+        reversed_List = [45, 65, 85]
+        self.multi_El_LinkedList.reverse()
+
+        current = self.multi_El_LinkedList.head
+
+        for value in reversed_List:
+            self.assertEqual(current.data, value)
+            current = current.get_Next()
+
 
 if __name__ == '__main__':
-        unittest.main()
+    unittest.main()
