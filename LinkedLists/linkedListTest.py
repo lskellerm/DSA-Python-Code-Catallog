@@ -308,6 +308,52 @@ class LinkedListTest(unittest.TestCase):
             self.assertEqual(current.data, value)
             current = current.get_Next()
 
+    def test_Remove_Value_Empty(self):
+        with self.assertRaises(Exception):
+            self.empty_LinkedList.remove_Value(5)
+
+    def test_Remove_Value_Not_Found(self):
+        with self.assertRaises(ValueError):
+            self.single_El_LinkedList.remove_Value(10)
+
+        with self.assertRaises(ValueError):
+            self.multi_El_LinkedList.remove_Value(25)
+
+    def test_Remove_Value_Single_El_List(self):
+        self.single_El_LinkedList.remove_Value(25)
+
+        self.assertEqual(len(self.single_El_LinkedList), 0)
+        self.assertTrue(self.single_El_LinkedList.is_Empty())
+        self.assertIsNone(self.single_El_LinkedList.head)
+        self.assertIsNone(self.single_El_LinkedList.tail)
+
+    def test_Remove_Value_Multi_El_List(self):
+        old_Count = len(self.multi_El_LinkedList)
+        old_Value = self.multi_El_LinkedList.value_At(2)
+
+        self.multi_El_LinkedList.remove_Value(65)
+
+        self.assertEqual(len(self.multi_El_LinkedList), old_Count - 1)
+        self.assertNotEqual(self.multi_El_LinkedList.head.get_next().data, old_Value)
+
+    def test_Remove_Value_Multi_El_List_Head(self):
+        old_Count = len(self.multi_El_LinkedList)
+        old_Head = self.multi_El_LinkedList.head.data
+
+        self.multi_El_LinkedList.remove_value(85)
+
+        self.assertEqual(len(self.multi_El_LinkedList), old_Count - 1)
+        self.assertNotEqual(self.multi_El_LinkedList.head.data, old_Head)
+
+    def test_Remove_Value_Multi_El_List_Tail(self):
+        old_Count = len(self.multi_El_LinkedList)
+        old_Tail = self.multi_El_LinkedList.tail.data
+
+        self.multi_El_LinkedList.remove_Value(45)
+
+        self.assertEqual(len(self.multi_El_LinkedList), old_Count - 1)
+        self.assertNotEqual(self.multi_El_LinkedList.tail.data, old_Tail)
+        self.assertIsNone(self.multi_El_LinkedList.tail.get_next())
 
 if __name__ == '__main__':
     unittest.main()
