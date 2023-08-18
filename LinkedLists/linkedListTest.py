@@ -106,9 +106,9 @@ class LinkedListTest(unittest.TestCase):
         value = self.multi_El_LinkedList.pop_Front()
 
         self.assertEqual(value, 85)
-        self.assertEqual(self.multi_El_LinkedList, old_Count - 1)
-        self.assertEqual(self.multi_El_LinkedList.head, 65)
-        self.assertEqual(self.multi_El_LinkedList.head.get_next(), 45)
+        self.assertEqual(len(self.multi_El_LinkedList), old_Count - 1)
+        self.assertEqual(self.multi_El_LinkedList.head.data, 65)
+        self.assertEqual(self.multi_El_LinkedList.head.get_next().data, 45)
 
     def test_Push_Back_Empty_List(self):
         self.empty_LinkedList.push_Back(7)
