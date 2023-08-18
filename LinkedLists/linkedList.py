@@ -63,5 +63,20 @@ class LinkedList:
         # Return the value of the node at the given index
         return curr.data
 
+    def push_Front(self, value):
+        """
+        Adds a new with the given value to the front of the linked list (Head)
+        \n Runs in constant, O(1) time
+        :param value: Value of the new node
+        """
+        new_Node = Node(value)  # Creates a new node with the provided value
+        new_Node.set_next(self.head)  # Sets the new nodes next pointer to point to current head
+
+        self.head = new_Node  # Update the head to point to the new node
+
+        if self.is_Empty():  # Checks if the linked list is initially empty
+            self.tail = new_Node  # Set tail to new node, now Head and Tail reference same node
+
+        self._size += 1  # Increment the size of linked list
 
 
