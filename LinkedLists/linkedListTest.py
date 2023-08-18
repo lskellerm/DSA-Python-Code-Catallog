@@ -116,7 +116,7 @@ class LinkedListTest(unittest.TestCase):
         self.assertEqual(len(self.empty_LinkedList), 1)
         self.assertEqual(self.empty_LinkedList.value_At(0), 7)
         self.assertEqual(self.empty_LinkedList.tail.data, 7)
-        self.assertEqual(self.empty_LinkedList.head, self.empty_LinkedList.data)
+        self.assertEqual(self.empty_LinkedList.head, self.empty_LinkedList.tail)
 
     def test_Push_Back_Non_Empty_List(self):
         old_Count = len(self.single_El_LinkedList)
@@ -124,6 +124,7 @@ class LinkedListTest(unittest.TestCase):
 
         self.assertEqual(self.single_El_LinkedList.tail.data, 5)
         self.assertEqual(self.single_El_LinkedList.tail.get_next(), None)
+        self.assertEqual(self.single_El_LinkedList.head.get_next(), None)
         self.assertEqual(len(self.single_El_LinkedList), old_Count + 1)
 
         old_Count = len(self.multi_El_LinkedList)
