@@ -32,8 +32,8 @@ class LinkedListTest(unittest.TestCase):
 
     def test_Value_At(self):
         self.assertEqual(self.single_El_LinkedList.value_At(0), 25)
-        self.assertEqual(self.single_El_LinkedList.value_At(0), self.single_El_LinkedList.head)
-        self.assertEqual(self.single_El_LinkedList.value_At(0), self.single_El_LinkedList.tail)
+        self.assertEqual(self.single_El_LinkedList.value_At(0), self.single_El_LinkedList.head.data)
+        self.assertEqual(self.single_El_LinkedList.value_At(0), self.single_El_LinkedList.tail.data)
 
         self.assertEqual(self.multi_El_LinkedList.value_At(0), 85)
         self.assertEqual(self.multi_El_LinkedList.value_At(1), 65)
@@ -61,7 +61,7 @@ class LinkedListTest(unittest.TestCase):
         self.assertEqual(self.empty_LinkedList.head.data, 100)
 
         self.assertEqual(self.empty_LinkedList.head.get_next(), None)
-        self.assertEqual(self.empty_LinkedList.tail, 100)
+        self.assertEqual(self.empty_LinkedList.tail.data, 100)
         self.assertEqual(self.empty_LinkedList.tail.get_next(), None)
 
     def test_Push_Front_Nonempty_List(self):

@@ -1,5 +1,4 @@
-import node
-
+from node import Node
 
 class LinkedList:
     """
@@ -59,7 +58,10 @@ class LinkedList:
 
         # Traverse Linked list to desired index
         for _ in range(index):
-            curr = curr.next
+            curr = curr.get_next()
 
+        # Return the value of the node at the given index
         return curr.data
+
+
 
