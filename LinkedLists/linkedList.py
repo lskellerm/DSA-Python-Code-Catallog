@@ -38,12 +38,28 @@ class LinkedList:
         """
         return self._size == 0
 
-    def test_Value_At(self, index):
+    def value_At(self, index):
         """
         Returns the value at the nth node (0-indexed)
         \n Runs in linear, O(n) time, where n is the number of nodes in the linked List
         :param index: The index of the item to retrieve
         :return: The value of the node at the given index
-        :raises IndexError if the index is out of range
+        :raises IndexError if the index is out of range or if the list is empty
         """
+
+        # Check if Linked List is empty
+        if self.is_Empty():
+            raise IndexError('Linked List is empty')
+
+        # Check for invalid index
+        if index < 0 or index > self._size - 1:
+            raise IndexError('Index out of range')
+
+        curr = self.head
+
+        # Traverse Linked list to desired index
+        for _ in range(index):
+            curr = curr.next
+
+        return curr.data
 
