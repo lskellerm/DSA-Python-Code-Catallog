@@ -96,7 +96,7 @@ class LinkedListTest(unittest.TestCase):
         value = self.single_El_LinkedList.pop_Front()
 
         self.assertEqual(value, 25)
-        self.assertEqual(self.single_El_LinkedList, old_Count - 1)
+        self.assertEqual(len(self.single_El_LinkedList), old_Count - 1)
         self.assertEqual((self.single_El_LinkedList.is_Empty()), True)
         self.assertEqual(self.single_El_LinkedList.head, None)
         self.assertEqual(self.single_El_LinkedList.tail, None)
