@@ -28,7 +28,7 @@ class LinkedListTest(unittest.TestCase):
     def test_empty(self):
         self.assertEqual(self.empty_LinkedList.is_Empty(), True)
         self.assertEqual(self.single_El_LinkedList.is_Empty(), False)
-        self.assertEqual(self.multi_El_LinkedList, False)
+        self.assertEqual(self.multi_El_LinkedList.is_Empty(), False)
 
     def test_Value_At(self):
         self.assertEqual(self.single_El_LinkedList.value_At(0), 25)
