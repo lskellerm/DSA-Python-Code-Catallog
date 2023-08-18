@@ -66,7 +66,7 @@ class LinkedList:
 
     def push_Front(self, value):
         """
-        Adds a new with the given value to the front of the linked list (Head)
+        Adds a new node with the given value to the front of the linked list (Head)
         \n Runs in constant, O(1) time
         :param value: Value of the new node
         """
@@ -102,3 +102,20 @@ class LinkedList:
         self._size -= 1  # Decrement the size
 
         return popped_Value  # Return the value of front popped_node
+
+    def push_Back(self, value):
+        """
+         Adds a new node with the given value to the back of the linked list (Tail)
+        \n Runs in constant, O(1) time
+        :param value: Value of the new node
+        """
+        new_Node = Node(value)  # Creates a new node with the provided value
+
+        if self.is_Empty():  # Checks if the linked list is initially empty
+            self.head = new_Node  # Set Head to new node, now Head and Tail reference same node
+            self.tail = new_Node
+        else:
+            self.tail.next = new_Node  # Update the current tail's next pointer to the new node
+            self.tail = new_Node  # Update the tail to the new node
+
+        self._size += 1  # Increment the size of linked list
