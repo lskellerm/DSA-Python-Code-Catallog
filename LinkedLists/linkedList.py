@@ -1,5 +1,6 @@
 from node import Node
 
+
 class LinkedList:
     """
         A singularly linked list, utilizing the Node ADT to implement Node functionalities
@@ -79,4 +80,25 @@ class LinkedList:
 
         self._size += 1  # Increment the size of linked list
 
+    def pop_Front(self):
+        """
+        Removes the front node from the linked list and returns its value
+        \n Runs in constant, O(1) time.
 
+        :return: The value from the remove front node (Head)
+        :raises Exception: If the Linked List is empty
+        """
+
+        if self.is_Empty():  # Checks whether Linked List is empty
+            raise Exception("Linked List is empty")
+
+        popped_Value = self.head.data  # Retrieve the value of the current head
+
+        self.head = self.head.get_next()  # Update the head to next node
+
+        if self.head is None:  # If the list is now empty, update the tail to None
+            self.tail = None
+
+        self._size -= 1  # Decrement the size
+
+        return popped_Value  # Return the value of front popped_node
