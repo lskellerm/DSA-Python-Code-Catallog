@@ -155,7 +155,7 @@ class LinkedListTest(unittest.TestCase):
 
         self.assertEqual(value, 45)
         self.assertEqual(len(self.multi_El_LinkedList), old_Count - 1)
-        self.assertEqual(self.multi_El_LinkedList.head, 65)
+        self.assertEqual(self.multi_El_LinkedList.head.data, 65)
         self.assertEqual(self.multi_El_LinkedList.head.get_next(), 45)
         self.assertEqual(self.multi_El_LinkedList.head.get_next().get_next(), None)
 
